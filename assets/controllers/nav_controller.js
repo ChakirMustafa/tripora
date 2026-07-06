@@ -15,6 +15,7 @@ export default class extends Controller {
 
     disconnect() {
         window.removeEventListener('scroll', this.onScroll);
+        window.clearTimeout(this.closeTimeout);
     }
 
     onScroll() {
@@ -26,7 +27,9 @@ export default class extends Controller {
         const isOpen = this.menuTarget.hasAttribute('hidden');
 
         if (isOpen) {
+            window.clearTimeout(this.closeTimeout);
             this.menuTarget.removeAttribute('hidden');
+            requestAnimationFrame(() => this.menuTarget.classList.add('mobile-menu--visible'));
             button.setAttribute('aria-expanded', 'true');
             button.setAttribute('aria-label', 'Menü schließen');
         } else {
@@ -35,12 +38,16 @@ export default class extends Controller {
     }
 
     close() {
-        this.menuTarget.setAttribute('hidden', '');
+        this.menuTarget.classList.remove('mobile-menu--visible');
         const button = this.element.querySelector('.nav-toggle');
         if (button) {
             button.setAttribute('aria-expanded', 'false');
             button.setAttribute('aria-label', 'Menü öffnen');
         }
+        window.clearTimeout(this.closeTimeout);
+        this.closeTimeout = window.setTimeout(() => {
+            this.menuTarget.setAttribute('hidden', '');
+        }, 220);
     }
 
     comingSoon(event) {
