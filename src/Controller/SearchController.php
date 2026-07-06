@@ -4,47 +4,28 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\City\GermanCityCatalog;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * Handles the "Stadt entdecken" search entry point from the homepage.
+ * Handles the "explore a city" search entry point from the homepage.
  *
- * Tripora is launching with a curated set of the 20 largest German
- * cities. The full search & discovery experience (attractions,
- * restaurants, itineraries, etc.) is planned for a follow-up
- * iteration — for now, a match against the whitelist leads to a
- * friendly holding page, and anything else guides the visitor back
- * to a supported city.
+ * The full search & discovery experience (attractions, restaurants,
+ * itineraries, etc.) is planned for a follow-up iteration. For now this
+ * controller validates the input and shows a friendly holding page so the
+ * homepage's primary call-to-action leads somewhere real.
  */
 final class SearchController extends AbstractController
 {
-    public function __construct(
-        private readonly GermanCityCatalog $cityCatalog,
-    ) {
-    }
-
-    #[Route('/suche', name: 'app_search', methods: ['GET'])]
+    #[Route('/search', name: 'app_search', methods: ['GET'])]
     public function search(Request $request): Response
     {
-        $query = trim((string) $request->query->get('city', ''));
+        $city = trim((string) $request->query->get('city', ''));
 
-        if ('' === $query) {
-            $this->addFlash('notice', 'Bitte gib zuerst eine Stadt ein — versuch es mit „Berlin“ oder „Leipzig“.');
-
-            return $this->redirectToRoute('app_home');
-        }
-
-        $city = $this->cityCatalog->findByName($query);
-
-        if (null === $city) {
-            $this->addFlash('notice', sprintf(
-                '„%s“ ist noch nicht dabei — wir starten mit den 20 größten Städten Deutschlands. Wähl eine davon aus der Liste.',
-                $query,
-            ));
+        if ('' === $city) {
+            $this->addFlash('notice', 'Tell us a city first — try "Berlin" or "Tokyo".');
 
             return $this->redirectToRoute('app_home');
         }

@@ -28,7 +28,7 @@ export default class extends Controller {
         if (isOpen) {
             this.menuTarget.removeAttribute('hidden');
             button.setAttribute('aria-expanded', 'true');
-            button.setAttribute('aria-label', 'Menü schließen');
+            button.setAttribute('aria-label', 'Close menu');
         } else {
             this.close();
         }
@@ -39,7 +39,7 @@ export default class extends Controller {
         const button = this.element.querySelector('.nav-toggle');
         if (button) {
             button.setAttribute('aria-expanded', 'false');
-            button.setAttribute('aria-label', 'Menü öffnen');
+            button.setAttribute('aria-label', 'Open menu');
         }
     }
 
@@ -47,7 +47,7 @@ export default class extends Controller {
         event.preventDefault();
         const input = document.getElementById('city-input');
         if (input) {
-            document.getElementById('suche')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('search')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             input.focus({ preventScroll: true });
         }
     }

@@ -4,210 +4,116 @@
 
 {% block body %}
 
-    <section class="hero hero--photo" id="suche">
-        <div class="hero__scene" aria-hidden="true">
-            <div class="hero__sky"></div>
-            <div class="hero__sun"></div>
-            <div class="hero__stars"></div>
-
-            <svg class="hero__skyline hero__skyline--back" viewBox="0 0 1200 220" preserveAspectRatio="none">
-                <rect x="0" y="90" width="70" height="130"/>
-                <rect x="80" y="60" width="50" height="160"/>
-                <rect x="140" y="110" width="90" height="110"/>
-                <rect x="245" y="40" width="60" height="180"/>
-                <rect x="320" y="95" width="110" height="125"/>
-                <rect x="445" y="70" width="55" height="150"/>
-                <rect x="515" y="105" width="95" height="115"/>
-                <rect x="625" y="35" width="65" height="185"/>
-                <rect x="705" y="90" width="100" height="130"/>
-                <rect x="820" y="65" width="55" height="155"/>
-                <rect x="890" y="100" width="120" height="120"/>
-                <rect x="1025" y="45" width="60" height="175"/>
-                <rect x="1100" y="95" width="100" height="125"/>
-            </svg>
-
-            <svg class="hero__skyline hero__skyline--front" viewBox="0 0 1200 260" preserveAspectRatio="none">
-                <rect x="-10" y="140" width="90" height="120"/>
-                <rect x="85" y="90" width="60" height="170"/>
-                <rect x="150" y="150" width="110" height="110"/>
-                <rect x="270" y="60" width="70" height="200"/>
-                <rect x="345" y="120" width="130" height="140"/>
-                <rect x="330" y="60" width="16" height="60"/>
-                <rect x="490" y="95" width="65" height="165"/>
-                <rect x="565" y="145" width="115" height="115"/>
-                <rect x="690" y="45" width="75" height="215"/>
-                <rect x="775" y="115" width="120" height="145"/>
-                <rect x="905" y="80" width="65" height="180"/>
-                <rect x="980" y="140" width="140" height="120"/>
-                <rect x="1130" y="55" width="80" height="205"/>
-                <g class="hero__skyline-lights">
-                    <rect x="100" y="115" width="6" height="8"/>
-                    <rect x="120" y="140" width="6" height="8"/>
-                    <rect x="300" y="90" width="6" height="8"/>
-                    <rect x="380" y="160" width="6" height="8"/>
-                    <rect x="410" y="200" width="6" height="8"/>
-                    <rect x="520" y="130" width="6" height="8"/>
-                    <rect x="600" y="175" width="6" height="8"/>
-                    <rect x="720" y="80" width="6" height="8"/>
-                    <rect x="810" y="150" width="6" height="8"/>
-                    <rect x="930" y="115" width="6" height="8"/>
-                    <rect x="1020" y="170" width="6" height="8"/>
-                    <rect x="1160" y="95" width="6" height="8"/>
-                </g>
-            </svg>
-
-            <svg class="hero__network" viewBox="0 0 800 400" fill="none" preserveAspectRatio="xMidYMid slice">
-                <g stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 6" stroke-linecap="round" opacity="0.6">
-                    <path d="M120 260 C 220 190, 300 220, 380 130"/>
-                    <path d="M380 130 C 460 70, 540 110, 640 70"/>
-                    <path d="M380 130 C 420 190, 500 200, 560 250"/>
-                    <path d="M120 260 C 180 290, 260 280, 320 300"/>
-                </g>
-                <g fill="currentColor">
-                    <circle cx="120" cy="260" r="3.5"/>
-                    <circle cx="380" cy="130" r="5"/>
-                    <circle cx="640" cy="70" r="3.5"/>
-                    <circle cx="560" cy="250" r="3.5"/>
-                    <circle cx="320" cy="300" r="3"/>
-                </g>
-            </svg>
-
-            <div class="hero__scrim"></div>
+    <section class="hero" id="search">
+        <div class="hero__bg" aria-hidden="true">
+            <span class="hero__blob hero__blob--1"></span>
+            <span class="hero__blob hero__blob--2"></span>
+            <span class="hero__blob hero__blob--3"></span>
+            <span class="hero__grid"></span>
         </div>
 
         <div class="container hero__inner">
-            <p class="badge-pill badge-pill--on-dark"><span aria-hidden="true">🇩🇪</span> Start in Deutschland — 20 Städte, mehr folgen</p>
+            <p class="eyebrow">Your next trip starts with one search</p>
 
             <h1 class="hero__title">
-                Stadt eingeben.<br>
-                <span class="hero__title-accent">Alles Wichtige entdecken.</span>
+                Search any city.<br>
+                <span class="hero__title-accent">Discover everything worth doing.</span>
             </h1>
 
             <p class="hero__subtitle">
-                Tripora kuratiert dir sofort die besten Sehenswürdigkeiten, Restaurants, Geheimtipps, Museen,
-                Cafés, Parks und Nightlife-Spots — und macht daraus eine fertige Route für deinen Tag.
+                Tripora instantly curates the best attractions, restaurants, hidden gems, museums,
+                cafés, parks and nightlife for any city on earth — then turns it into a ready-made itinerary.
             </p>
 
-            <div class="city-search" {{ stimulus_controller('city-search', { cities: cities_data, popular: popular_slugs, limit: 8 }) }}>
-                <form class="search-bar" action="{{ path('app_search') }}" method="get" role="search" aria-label="Stadt suchen">
-                    <svg class="search-bar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                        <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                    </svg>
-                    <label for="city-input" class="sr-only">Stadt</label>
-                    <input
-                        type="text"
-                        id="city-input"
-                        name="city"
-                        class="search-bar__input"
-                        placeholder="z. B. „Berlin“, „Hamburg“, „München“ …"
-                        autocomplete="off"
-                        required
-                        role="combobox"
-                        aria-expanded="false"
-                        aria-autocomplete="list"
-                        aria-haspopup="listbox"
-                        aria-controls="city-listbox"
-                        data-city-search-target="input"
-                        data-action="focus->city-search#onFocus input->city-search#onInput keydown->city-search#onKeydown"
-                    >
-                    <button type="submit" class="btn btn--primary search-bar__submit">
-                        Entdecken
-                    </button>
-                </form>
-                <div
-                    class="city-search__panel"
-                    id="city-listbox"
-                    role="listbox"
-                    aria-label="Stadtvorschläge"
-                    data-city-search-target="panel"
-                    hidden
-                ></div>
-            </div>
+            <form class="search-bar" action="{{ path('app_search') }}" method="get" role="search" aria-label="Search a city">
+                <svg class="search-bar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <label for="city-input" class="sr-only">City</label>
+                <input
+                    type="text"
+                    id="city-input"
+                    name="city"
+                    class="search-bar__input"
+                    placeholder="Try “Berlin”, “Tokyo”, “Lisbon”…"
+                    list="city-suggestions"
+                    autocomplete="off"
+                    required
+                >
+                <datalist id="city-suggestions">
+                    {% for city in featured_cities %}
+                        <option value="{{ city.name }}"></option>
+                    {% endfor %}
+                    <option value="Rome"></option>
+                    <option value="Barcelona"></option>
+                    <option value="Amsterdam"></option>
+                    <option value="London"></option>
+                </datalist>
+                <button type="submit" class="btn btn--primary search-bar__submit">
+                    Explore
+                </button>
+            </form>
 
-            <p class="hero__hint hero__hint--on-dark">Keine Anmeldung zum Stöbern nötig · Für Reisende kostenlos</p>
+            <p class="hero__hint">No sign-up needed to browse · Free forever for travelers</p>
 
-            <div class="hero__quick-picks hero__quick-picks--on-dark">
-                <span>Gerade beliebt:</span>
-                {% for city in popular_cities|slice(0, 5) %}
-                    <a href="{{ path('app_search', { city: city.name }) }}">{{ city.name }}</a>{% if not loop.last %} · {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <section class="trust-row" aria-label="Gut zu wissen">
-        <div class="container trust-row__grid">
-            <div class="trust-row__item">
-                <span aria-hidden="true">🕶️</span>
-                <span>Kostenlos &amp; werbefrei</span>
-            </div>
-            <div class="trust-row__item">
-                <span aria-hidden="true">🧭</span>
-                <span>Kuratiert von echten Locals</span>
-            </div>
-            <div class="trust-row__item">
-                <span aria-hidden="true">🔄</span>
-                <span>Läuft auf jedem Gerät</span>
-            </div>
-            <div class="trust-row__item">
-                <span aria-hidden="true">🇩🇪</span>
-                <span>20 Städte, mehr kommen bald</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" {{ stimulus_controller('reveal') }}>
-        <div class="container">
-            <div class="promo-banner" data-reveal-target="item">
-                <div class="promo-banner__visual" aria-hidden="true">
-                    <span class="promo-banner__chip promo-banner__chip--1 promo-banner__chip--violet">
-                        {% include 'partials/_icon.html.twig' with { icon: 'pin' } %}
-                    </span>
-                    <span class="promo-banner__chip promo-banner__chip--2 promo-banner__chip--coral">
-                        {% include 'partials/_icon.html.twig' with { icon: 'fork' } %}
-                    </span>
-                    <span class="promo-banner__chip promo-banner__chip--3 promo-banner__chip--teal">
-                        {% include 'partials/_icon.html.twig' with { icon: 'spark' } %}
-                    </span>
-                    <span class="promo-banner__chip promo-banner__chip--4 promo-banner__chip--amber">
-                        {% include 'partials/_icon.html.twig' with { icon: 'cup' } %}
-                    </span>
-                    <span class="promo-banner__badge">Von Hand kuratiert</span>
+            <div class="hero__chips" aria-hidden="true">
+                <div class="hero__chip hero__chip--a">
+                    <span class="hero__chip-emoji">🏛️</span>
+                    <span>482 attractions curated in Berlin</span>
                 </div>
-                <div class="promo-banner__content">
-                    <p class="eyebrow">Unser Ansatz</p>
-                    <h2>Von echten Locals, nicht von Algorithmen</h2>
-                    <p>
-                        Jede Empfehlung auf Tripora wird von Menschen kuratiert, die ihre Stadt wirklich kennen —
-                        keine bezahlten Platzierungen, keine gekauften Bewertungen. Nur ehrliche Tipps für
-                        Sehenswürdigkeiten, Essen und die Orte, die man sonst nur durch Zufall findet.
-                    </p>
-                    <a class="link-arrow" href="#so-funktionierts">Mehr über unseren Ansatz →</a>
+                <div class="hero__chip hero__chip--b">
+                    <span class="hero__chip-emoji">☕</span>
+                    <span>Hidden cafés, mapped street by street</span>
+                </div>
+                <div class="hero__chip hero__chip--c">
+                    <span class="hero__chip-emoji">🌃</span>
+                    <span>Nightlife guide, updated weekly</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section section--muted" id="kategorien" {{ stimulus_controller('reveal') }}>
+    <section class="stats-strip" aria-label="Platform statistics">
+        <div class="container stats-strip__row">
+            <div class="stat">
+                <span class="stat__value">120+</span>
+                <span class="stat__label">countries covered</span>
+            </div>
+            <div class="stat">
+                <span class="stat__value">2,400+</span>
+                <span class="stat__label">cities mapped</span>
+            </div>
+            <div class="stat">
+                <span class="stat__value">180K+</span>
+                <span class="stat__label">places curated</span>
+            </div>
+            <div class="stat">
+                <span class="stat__value">4.9/5</span>
+                <span class="stat__label">average traveler rating</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="what-you-get" {{ stimulus_controller('reveal') }}>
         <div class="container">
             <div class="section-heading">
-                <p class="eyebrow">Was dich erwartet</p>
-                <h2>Jeder gute Grund, eine Stadt zu lieben — an einem Ort</h2>
+                <p class="eyebrow">What you'll find</p>
+                <h2>Every reason to love a city, in one place</h2>
                 <p class="section-heading__lede">
-                    Schluss mit zehn offenen Tabs und veralteten Blogposts. Tripora kuratiert alles, für jede Stadt der Liste.
+                    Stop juggling ten tabs and outdated blog posts. Tripora curates it all, for any city, instantly.
                 </p>
             </div>
 
             <div class="feature-grid">
                 {% set features = [
-                    { icon: 'pin', title: 'Sehenswürdigkeiten', text: 'Landmarken, Aussichtspunkte und Must-Sees — sortiert nach dem, was wirklich überzeugt.' },
-                    { icon: 'fork', title: 'Restaurants', text: 'Von Street Food bis Menü — filterbar nach Küche, Budget und Stadtteil.' },
-                    { icon: 'spark', title: 'Geheimtipps', text: 'Die Orte, die es nie in den Reiseführer schaffen, aber jeder Local kennt.' },
-                    { icon: 'columns', title: 'Museen & Kultur', text: 'Galerien, Museen und Kulturorte — mit genug Kontext, damit sich der Besuch lohnt.' },
-                    { icon: 'route', title: 'Routenplanung', text: 'Fertige Tagespläne, die aus einer Liste von Orten einen echten Ausflug machen.' },
-                    { icon: 'cup', title: 'Cafés', text: 'Die besten Orte zum Runterkommen, Arbeiten oder Leute-Beobachten bei gutem Kaffee.' },
-                    { icon: 'tree', title: 'Parks & Natur', text: 'Grünflächen, Ufer und ruhige Ecken mitten in jeder Stadt.' },
-                    { icon: 'moon', title: 'Nightlife', text: 'Bars, Livemusik und Spots für später — passend zur gewünschten Stimmung.' },
+                    { icon: 'pin', title: 'Attractions', text: 'Landmarks, viewpoints and can’t-miss sights, ranked by what locals and travelers actually love.' },
+                    { icon: 'fork', title: 'Restaurants', text: 'From street food to tasting menus — filtered by cuisine, budget and neighborhood.' },
+                    { icon: 'spark', title: 'Hidden gems', text: 'The spots that never make the guidebooks, surfaced from real local knowledge.' },
+                    { icon: 'columns', title: 'Museums & culture', text: 'Galleries, museums and cultural sites, with the context to make them worth the visit.' },
+                    { icon: 'route', title: 'Itineraries', text: 'Ready-made day plans that turn a list of places into an actual day out.' },
+                    { icon: 'cup', title: 'Cafés', text: 'The best places to slow down, work, or people-watch over great coffee.' },
+                    { icon: 'tree', title: 'Parks & nature', text: 'Green space, waterfronts and quiet escapes inside every city.' },
+                    { icon: 'moon', title: 'Nightlife', text: 'Bars, live music and late-night spots that match the vibe you’re after.' },
                 ] %}
 
                 {% for feature in features %}
@@ -223,48 +129,45 @@
         </div>
     </section>
 
-    <section class="section" id="so-funktionierts" {{ stimulus_controller('reveal') }}>
+    <section class="section section--muted" id="how-it-works" {{ stimulus_controller('reveal') }}>
         <div class="container">
             <div class="section-heading">
-                <p class="eyebrow">So funktioniert's</p>
-                <h2>Vom Stadtnamen zum fertigen Tag — in Sekunden</h2>
+                <p class="eyebrow">How it works</p>
+                <h2>From city name to full day out in seconds</h2>
             </div>
 
             <ol class="steps">
                 <li class="step" data-reveal-target="item">
                     <span class="step__number">01</span>
-                    <h3>Stadt eingeben</h3>
-                    <p>Wähl eine der 20 Städte. Kein Account, kein Aufwand — einfach tippen.</p>
+                    <h3>Search any city</h3>
+                    <p>Type a city, anywhere in the world. No account, no setup — just start typing.</p>
                 </li>
                 <li class="step" data-reveal-target="item">
                     <span class="step__number">02</span>
-                    <h3>Kuratierte Auswahl erhalten</h3>
-                    <p>Wir zeigen dir die besten Sehenswürdigkeiten, Restaurants, Kultur und Nightlife — sortiert nach Kategorie.</p>
+                    <h3>Get curated picks</h3>
+                    <p>We surface the best attractions, food, culture and nightlife — organized by category and vibe.</p>
                 </li>
                 <li class="step" data-reveal-target="item">
                     <span class="step__number">03</span>
-                    <h3>Route zusammenstellen</h3>
-                    <p>Favoriten speichern und Tripora daraus einen machbaren, laufbaren Tagesplan bauen lassen.</p>
+                    <h3>Build your itinerary</h3>
+                    <p>Save favorites and let Tripora arrange them into a realistic, walkable day-by-day plan.</p>
                 </li>
             </ol>
         </div>
     </section>
 
-    <section class="section" id="staedte" {{ stimulus_controller('reveal')|stimulus_controller('city-carousel') }}>
+    <section class="section" id="explore" {{ stimulus_controller('reveal')|stimulus_controller('city-carousel') }}>
         <div class="container">
             <div class="section-heading section-heading--split">
                 <div>
-                    <p class="eyebrow">Die 20 Startstädte</p>
-                    <h2>Deutschlands größte Städte, startklar</h2>
-                    <p class="section-heading__note">
-                        Bewertungen und Tagesbudgets sind Vorschau-Werte für unser kommendes Empfehlungs-Feature — noch keine echten Nutzerdaten.
-                    </p>
+                    <p class="eyebrow">Popular right now</p>
+                    <h2>Where travelers are exploring today</h2>
                 </div>
                 <div class="carousel-controls">
-                    <button type="button" class="carousel-btn" aria-label="Nach links scrollen" {{ stimulus_action('city-carousel', 'prev') }}>
+                    <button type="button" class="carousel-btn" aria-label="Scroll left" {{ stimulus_action('city-carousel', 'prev') }}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
                     </button>
-                    <button type="button" class="carousel-btn" aria-label="Nach rechts scrollen" {{ stimulus_action('city-carousel', 'next') }}>
+                    <button type="button" class="carousel-btn" aria-label="Scroll right" {{ stimulus_action('city-carousel', 'next') }}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
                     </button>
                 </div>
@@ -273,49 +176,17 @@
 
         <div class="city-row-wrap container">
             <div class="city-row" {{ stimulus_target('city-carousel', 'track') }}>
-                {% for city in popular_cities %}
+                {% for city in featured_cities %}
                     <a href="{{ path('app_search', { city: city.name }) }}" class="city-card city-card--{{ city.accent }}" data-reveal-target="item">
-                        <span class="city-card__image" aria-hidden="true">
-                            <span class="city-card__skyline">
-                                {% include 'partials/_skyline.html.twig' %}
-                            </span>
-                            <span class="city-card__tag">
-                                {% include 'partials/_icon.html.twig' with { icon: city.highlightIcon } %}
-                                {{ city.highlightLabel }}
-                            </span>
+                        <span class="city-card__skyline" aria-hidden="true">
+                            {% include 'partials/_skyline.html.twig' %}
                         </span>
                         <span class="city-card__body">
                             <span class="city-card__name">{{ city.name }}</span>
-                            <span class="city-card__country">{{ city.state }}</span>
+                            <span class="city-card__country">{{ city.country }}</span>
                             <span class="city-card__tagline">{{ city.tagline }}</span>
-                            <span class="city-card__stats">
-                                <span class="city-card__rating">
-                                    <span aria-hidden="true">★</span> {{ city.ratingLabel() }}
-                                    <span class="city-card__rating-count">({{ city.recommendations }})</span>
-                                </span>
-                                <span class="city-card__budget">ab {{ city.dailyBudgetFrom }} €/Tag</span>
-                            </span>
+                            <span class="city-card__meta">{{ city.places }} curated places</span>
                         </span>
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
-
-    </section>
-
-    <section class="section section--muted" id="reiseziele" {{ stimulus_controller('reveal') }}>
-        <div class="container">
-            <div class="section-heading">
-                <p class="eyebrow">Reiseziele</p>
-                <h2>Alle 20 Städte im Überblick</h2>
-                <p class="section-heading__lede">Jede Stadt kommt mit denselben 8 Kategorien — von Sehenswürdigkeiten bis Nightlife.</p>
-            </div>
-
-            <div class="destination-grid">
-                {% for city in cities %}
-                    <a href="{{ path('app_search', { city: city.name }) }}" class="destination-tile" data-reveal-target="item">
-                        <span class="destination-tile__name">{{ city.name }}</span>
-                        <span class="destination-tile__meta">{{ city.state }} · 8 Kategorien</span>
                     </a>
                 {% endfor %}
             </div>
@@ -328,45 +199,25 @@
                 <path d="M0 20.8C0 9.3 8 1.7 18.7 0l2 5.6C13.9 7.6 9.9 12 9.6 17.3c1-.5 2.1-.7 3.4-.7 5 0 8.7 3.6 8.7 8.7S17.4 34 12.3 34C5.3 34 0 28.6 0 20.8Zm20.6 0C20.6 9.3 28.6 1.7 39.3 0l2 5.6c-6.8 2-10.8 6.4-11.1 11.7 1-.5 2.1-.7 3.4-.7 5 0 8.7 3.6 8.7 8.7S37.4 34 32.3 34c-7 0-12.3-5.4-12.3-13.2Z" transform="translate(0 -2)"/>
             </svg>
             <p class="quote-section__text">
-                „Ich hab eine Stadt eingegeben und hatte einen kompletten Tag geplant — Sehenswürdigkeit,
-                Mittagsspot, ein Park zum Durchatmen und eine Bar für später. Hat sich angefühlt, als hätte
-                ich eine ortskundige Freundin, die schon alles rausgesucht hat.“
+                “I typed in one city and had a full day planned — attractions, lunch spot, a park to
+                decompress in, and a bar for later. It felt like having a local friend who already
+                did the research.”
             </p>
             <div class="quote-section__author">
                 <span class="avatar" aria-hidden="true">MK</span>
                 <div>
                     <strong>Mira K.</strong>
-                    <span>War mit Tripora in 6 Städten unterwegs</span>
+                    <span>Traveled to 14 cities with Tripora</span>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section onboarding-strip">
-        <div class="container onboarding-strip__grid">
-            <div class="onboarding-strip__item">
-                <span class="onboarding-strip__icon" aria-hidden="true">🗺️</span>
-                <h3>Deutschlandweit unterwegs</h3>
-                <p>Sehenswürdigkeiten, Restaurants und Geheimtipps für die 20 größten Städte Deutschlands — mehr kommt laufend dazu.</p>
-            </div>
-            <div class="onboarding-strip__item">
-                <span class="onboarding-strip__icon" aria-hidden="true">⚡</span>
-                <h3>In Sekunden zur Route</h3>
-                <p>Stadt eingeben, Kategorien durchstöbern, Favoriten merken — fertig ist der Plan für deinen Tag.</p>
-            </div>
-            <div class="onboarding-strip__item">
-                <span class="onboarding-strip__icon" aria-hidden="true">🕒</span>
-                <h3>Immer aktuell gehalten</h3>
-                <p>Unsere Empfehlungen werden laufend von echten Locals überprüft und ergänzt.</p>
             </div>
         </div>
     </section>
 
     <section class="cta-banner">
         <div class="container cta-banner__inner">
-            <h2>Stadt wählen. Wir übernehmen den Rest.</h2>
-            <p>Kostenlos zum Entdecken — kein Account nötig, um loszulegen.</p>
-            <a href="#suche" class="btn btn--light">Jetzt Stadt entdecken</a>
+            <h2>Pick a city. We'll handle the rest.</h2>
+            <p>It's free to explore — no account required to start browsing.</p>
+            <a href="#search" class="btn btn--light">Start exploring now</a>
         </div>
     </section>
 

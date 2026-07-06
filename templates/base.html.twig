@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0B0B12">
 
-    <title>{% block title %}Tripora — Entdecke deine nächste Stadt{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Tripora zeigt dir sofort die besten Sehenswürdigkeiten, Restaurants, Geheimtipps, Museen, Cafés, Parks und Nightlife-Spots — aktuell für die 20 größten Städte Deutschlands.{% endblock %}">
+    <title>{% block title %}Tripora — Discover any city, instantly{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Search any city and instantly get curated attractions, restaurants, hidden gems, museums, cafés, parks, nightlife and ready-made itineraries. Travel planning, reimagined.{% endblock %}">
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="{{ url('app_home') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
 
     {% block importmap %}{{ importmap('app') }}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
-    <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
     {% include 'partials/_nav.html.twig' %}
 
@@ -29,7 +29,7 @@
             <div class="flash flash--{{ label }}" role="status">
                 <div class="flash__inner">
                     <span>{{ message }}</span>
-                    <button type="button" class="flash__close" aria-label="Schließen" onclick="this.closest('.flash').remove()">&times;</button>
+                    <button type="button" class="flash__close" aria-label="Dismiss" onclick="this.closest('.flash').remove()">&times;</button>
                 </div>
             </div>
         {% endfor %}

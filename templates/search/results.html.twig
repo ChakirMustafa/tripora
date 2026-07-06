@@ -1,21 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ city.name }} entdecken — Tripora{% endblock %}
-{% block meta_description %}Tripora stellt gerade die besten Sehenswürdigkeiten, Restaurants und Geheimtipps in {{ city.name }} zusammen.{% endblock %}
+{% block title %}Exploring {{ city }} — Tripora{% endblock %}
+{% block meta_description %}Tripora is mapping out the best attractions, restaurants and hidden gems in {{ city }}.{% endblock %}
 {% block body_class %}page-search{% endblock %}
 
 {% block body %}
     <section class="section holding">
         <div class="container holding__inner">
-            <p class="eyebrow">{{ city.state }}</p>
-            <h1>{{ city.name }}</h1>
-            <p class="holding__meta">{{ city.populationLabel() }} · {{ city.tagline }}</p>
+            <p class="eyebrow">Exploring</p>
+            <h1>{{ city }}</h1>
             <p class="holding__text">
-                Wir stellen gerade Sehenswürdigkeiten, Restaurants, Geheimtipps und Routen für
-                <strong>{{ city.name }}</strong> im Detail zusammen. Die vollständige Suche startet bald —
-                danke, dass du schon jetzt mit dabei bist.
+                We're still mapping out attractions, restaurants, hidden gems and itineraries for
+                <strong>{{ city }}</strong> in detail. Full search results are launching soon —
+                thanks for being an early explorer.
             </p>
-            <a href="{{ path('app_home') }}" class="btn btn--primary">Zurück zur Startseite</a>
+            <a href="{{ path('app_home') }}" class="btn btn--primary">Back to homepage</a>
         </div>
     </section>
 {% endblock %}

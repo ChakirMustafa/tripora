@@ -18,8 +18,8 @@ export default class extends Controller {
         }
 
         this.buttonTarget.disabled = true;
-        this.buttonTarget.textContent = 'Eingetragen';
-        this.noteTarget.textContent = 'Du bist auf der Liste — wir melden uns, wenn neue Städte dazukommen.';
+        this.buttonTarget.textContent = 'Added';
+        this.noteTarget.textContent = "You're on the list — we'll email you when we launch new cities.";
         this.inputTarget.value = '';
     }
 }
