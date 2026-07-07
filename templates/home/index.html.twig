@@ -83,11 +83,6 @@
                 <span class="hero__title-accent">Alles Wichtige entdecken.</span>
             </h1>
 
-            <p class="hero__subtitle">
-                Tripora kuratiert dir sofort die besten Sehenswürdigkeiten, Restaurants, Geheimtipps, Museen,
-                Cafés, Parks und Nightlife-Spots — und macht daraus eine fertige Route für deinen Tag.
-            </p>
-
             <div class="city-search" {{ stimulus_controller('city-search', { cities: cities_data, popular: popular_slugs, limit: 8 }) }}>
                 <form class="search-bar" action="{{ path('app_search') }}" method="get" role="search" aria-label="Stadt suchen">
                     <svg class="search-bar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -123,6 +118,11 @@
                     hidden
                 ></div>
             </div>
+
+            <p class="hero__subtitle">
+                Tripora kuratiert dir sofort die besten Sehenswürdigkeiten, Restaurants, Geheimtipps, Museen,
+                Cafés, Parks und Nightlife-Spots — und macht daraus eine fertige Route für deinen Tag.
+            </p>
 
             <p class="hero__hint hero__hint--on-dark">Keine Anmeldung zum Stöbern nötig · Für Reisende kostenlos</p>
 
