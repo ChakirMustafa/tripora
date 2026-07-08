@@ -5,73 +5,18 @@
 {% block body %}
 
     <section class="hero hero--photo" id="suche">
-        <div class="hero__scene" aria-hidden="true">
-            <div class="hero__sky"></div>
-            <div class="hero__sun"></div>
-            <div class="hero__stars"></div>
+        <div class="hero__scene hero__scene--photo" aria-hidden="true">
+            <div class="hero__photo-sky"></div>
+            <div class="hero__photo-glow"></div>
 
-            <svg class="hero__skyline hero__skyline--back" viewBox="0 0 1200 220" preserveAspectRatio="none">
-                <rect x="0" y="90" width="70" height="130"/>
-                <rect x="80" y="60" width="50" height="160"/>
-                <rect x="140" y="110" width="90" height="110"/>
-                <rect x="245" y="40" width="60" height="180"/>
-                <rect x="320" y="95" width="110" height="125"/>
-                <rect x="445" y="70" width="55" height="150"/>
-                <rect x="515" y="105" width="95" height="115"/>
-                <rect x="625" y="35" width="65" height="185"/>
-                <rect x="705" y="90" width="100" height="130"/>
-                <rect x="820" y="65" width="55" height="155"/>
-                <rect x="890" y="100" width="120" height="120"/>
-                <rect x="1025" y="45" width="60" height="175"/>
-                <rect x="1100" y="95" width="100" height="125"/>
-            </svg>
+            <div class="hero__photo-skyline hero__photo-skyline--back">
+                {% include 'partials/_skyline.html.twig' %}
+            </div>
+            <div class="hero__photo-skyline hero__photo-skyline--front">
+                {% include 'partials/_skyline.html.twig' with { lights: true } %}
+            </div>
 
-            <svg class="hero__skyline hero__skyline--front" viewBox="0 0 1200 260" preserveAspectRatio="none">
-                <rect x="-10" y="140" width="90" height="120"/>
-                <rect x="85" y="90" width="60" height="170"/>
-                <rect x="150" y="150" width="110" height="110"/>
-                <rect x="270" y="60" width="70" height="200"/>
-                <rect x="345" y="120" width="130" height="140"/>
-                <rect x="330" y="60" width="16" height="60"/>
-                <rect x="490" y="95" width="65" height="165"/>
-                <rect x="565" y="145" width="115" height="115"/>
-                <rect x="690" y="45" width="75" height="215"/>
-                <rect x="775" y="115" width="120" height="145"/>
-                <rect x="905" y="80" width="65" height="180"/>
-                <rect x="980" y="140" width="140" height="120"/>
-                <rect x="1130" y="55" width="80" height="205"/>
-                <g class="hero__skyline-lights">
-                    <rect x="100" y="115" width="6" height="8"/>
-                    <rect x="120" y="140" width="6" height="8"/>
-                    <rect x="300" y="90" width="6" height="8"/>
-                    <rect x="380" y="160" width="6" height="8"/>
-                    <rect x="410" y="200" width="6" height="8"/>
-                    <rect x="520" y="130" width="6" height="8"/>
-                    <rect x="600" y="175" width="6" height="8"/>
-                    <rect x="720" y="80" width="6" height="8"/>
-                    <rect x="810" y="150" width="6" height="8"/>
-                    <rect x="930" y="115" width="6" height="8"/>
-                    <rect x="1020" y="170" width="6" height="8"/>
-                    <rect x="1160" y="95" width="6" height="8"/>
-                </g>
-            </svg>
-
-            <svg class="hero__network" viewBox="0 0 800 400" fill="none" preserveAspectRatio="xMidYMid slice">
-                <g stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 6" stroke-linecap="round" opacity="0.6">
-                    <path d="M120 260 C 220 190, 300 220, 380 130"/>
-                    <path d="M380 130 C 460 70, 540 110, 640 70"/>
-                    <path d="M380 130 C 420 190, 500 200, 560 250"/>
-                    <path d="M120 260 C 180 290, 260 280, 320 300"/>
-                </g>
-                <g fill="currentColor">
-                    <circle cx="120" cy="260" r="3.5"/>
-                    <circle cx="380" cy="130" r="5"/>
-                    <circle cx="640" cy="70" r="3.5"/>
-                    <circle cx="560" cy="250" r="3.5"/>
-                    <circle cx="320" cy="300" r="3"/>
-                </g>
-            </svg>
-
+            <div class="hero__grain"></div>
             <div class="hero__scrim"></div>
         </div>
 
@@ -272,6 +217,12 @@
         </div>
 
         <div class="city-row-wrap container">
+            <button type="button" class="carousel-btn carousel-btn--overlay carousel-btn--overlay-prev" aria-label="Nach links scrollen" {{ stimulus_action('city-carousel', 'prev') }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button type="button" class="carousel-btn carousel-btn--overlay carousel-btn--overlay-next" aria-label="Nach rechts scrollen" {{ stimulus_action('city-carousel', 'next') }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
             <div class="city-row" {{ stimulus_target('city-carousel', 'track') }}>
                 {% for city in popular_cities %}
                     <a href="{{ path('app_search', { city: city.name }) }}" class="city-card city-card--{{ city.accent }}" data-reveal-target="item">
@@ -295,6 +246,7 @@
                                 </span>
                                 <span class="city-card__budget">ab {{ city.dailyBudgetFrom }} €/Tag</span>
                             </span>
+                            <span class="city-card__cta">Jetzt entdecken <span aria-hidden="true">→</span></span>
                         </span>
                     </a>
                 {% endfor %}
