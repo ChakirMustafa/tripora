@@ -3,161 +3,174 @@
 {% block body_class %}page-home{% endblock %}
 
 {% block body %}
+    {% set discovery_filters = [
+        { icon: 'pin', title: 'Sehenswürdigkeiten', text: 'Landmarks, Aussichtspunkte und Orte, die man in einer Stadt zuerst sehen will.' },
+        { icon: 'fork', title: 'Restaurants & Cafés', text: 'Von schnell und günstig bis Date-Night: kuratiert statt endlos gesucht.' },
+        { icon: 'spark', title: 'Locals Favorites', text: 'Ecken, die nicht in jedem Standard-Guide stehen, aber den Tag besonders machen.' },
+        { icon: 'route', title: 'Routen für den Tag', text: 'Aus einzelnen Tipps wird ein sinnvoller Plan für ein Wochenende oder einen Tagestrip.' },
+    ] %}
+    {% set collection_tiles = [
+        { eyebrow: 'Für Wochenenden', title: 'Städte, die sich sofort gut anfühlen', text: 'Kompakte Altstädte, starke Food-Szene und genug Highlights für zwei volle Tage.', accent: 'violet' },
+        { eyebrow: 'Für Foodies', title: 'Zwischen Street Food und langen Abenden', text: 'Finde Städte mit Märkten, Cafés, kleinen Bars und Restaurants, die man nicht wieder vergisst.', accent: 'coral' },
+        { eyebrow: 'Für Kultur', title: 'Museen, Architektur und gute Wege dazwischen', text: 'Perfekt für alle, die Kulturorte mit Parks, Aussicht und kurzen Laufwegen kombinieren wollen.', accent: 'amber' },
+        { eyebrow: 'Für entspannte Trips', title: 'Mehr entdecken, weniger planen', text: 'Tripora bündelt die wichtigsten Spots, damit du nicht zehn Tabs parallel offen halten musst.', accent: 'teal' },
+    ] %}
 
-    <section class="hero hero--photo" id="suche">
-        <div class="hero__scene hero__scene--photo" aria-hidden="true">
-            <div class="hero__photo-sky"></div>
-            <div class="hero__photo-glow"></div>
+    <section class="market-hero" id="suche">
+        <div class="container market-hero__inner">
+            <div class="market-hero__content">
+                <p class="market-hero__kicker">Deutschlandweit live · {{ cities|length }} Städte kuratiert · laufend erweitert</p>
 
-            <div class="hero__photo-skyline hero__photo-skyline--back">
-                {% include 'partials/_skyline.html.twig' %}
-            </div>
-            <div class="hero__photo-skyline hero__photo-skyline--front">
-                {% include 'partials/_skyline.html.twig' with { lights: true } %}
-            </div>
-
-            <div class="hero__grain"></div>
-            <div class="hero__scrim"></div>
-        </div>
-
-        <div class="container hero__inner">
-            <p class="badge-pill badge-pill--on-dark"><span aria-hidden="true">🇩🇪</span> Start in Deutschland — 20 Städte, mehr folgen</p>
-
-            <h1 class="hero__title">
-                Stadt eingeben.<br>
-                <span class="hero__title-accent">Alles Wichtige entdecken.</span>
-            </h1>
-
-            <div class="city-search" {{ stimulus_controller('city-search', { cities: cities_data, popular: popular_slugs, limit: 8 }) }}>
-                <form class="search-bar" action="{{ path('app_search') }}" method="get" role="search" aria-label="Stadt suchen">
-                    <svg class="search-bar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                        <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                    </svg>
-                    <label for="city-input" class="sr-only">Stadt</label>
-                    <input
-                        type="text"
-                        id="city-input"
-                        name="city"
-                        class="search-bar__input"
-                        placeholder="z. B. „Berlin“, „Hamburg“, „München“ …"
-                        autocomplete="off"
-                        required
-                        role="combobox"
-                        aria-expanded="false"
-                        aria-autocomplete="list"
-                        aria-haspopup="listbox"
-                        aria-controls="city-listbox"
-                        data-city-search-target="input"
-                        data-action="focus->city-search#onFocus input->city-search#onInput keydown->city-search#onKeydown"
-                    >
-                    <button type="submit" class="btn btn--primary search-bar__submit">
-                        Entdecken
-                    </button>
-                </form>
-                <div
-                    class="city-search__panel"
-                    id="city-listbox"
-                    role="listbox"
-                    aria-label="Stadtvorschläge"
-                    data-city-search-target="panel"
-                    hidden
-                ></div>
-            </div>
-
-            <p class="hero__subtitle">
-                Tripora kuratiert dir sofort die besten Sehenswürdigkeiten, Restaurants, Geheimtipps, Museen,
-                Cafés, Parks und Nightlife-Spots — und macht daraus eine fertige Route für deinen Tag.
-            </p>
-
-            <p class="hero__hint hero__hint--on-dark">Keine Anmeldung zum Stöbern nötig · Für Reisende kostenlos</p>
-
-            <div class="hero__quick-picks hero__quick-picks--on-dark">
-                <span>Gerade beliebt:</span>
-                {% for city in popular_cities|slice(0, 5) %}
-                    <a href="{{ path('app_search', { city: city.name }) }}">{{ city.name }}</a>{% if not loop.last %} · {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <section class="trust-row" aria-label="Gut zu wissen">
-        <div class="container trust-row__grid">
-            <div class="trust-row__item">
-                <span aria-hidden="true">🕶️</span>
-                <span>Kostenlos &amp; werbefrei</span>
-            </div>
-            <div class="trust-row__item">
-                <span aria-hidden="true">🧭</span>
-                <span>Kuratiert von echten Locals</span>
-            </div>
-            <div class="trust-row__item">
-                <span aria-hidden="true">🔄</span>
-                <span>Läuft auf jedem Gerät</span>
-            </div>
-            <div class="trust-row__item">
-                <span aria-hidden="true">🇩🇪</span>
-                <span>20 Städte, mehr kommen bald</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" {{ stimulus_controller('reveal') }}>
-        <div class="container">
-            <div class="promo-banner" data-reveal-target="item">
-                <div class="promo-banner__visual" aria-hidden="true">
-                    <span class="promo-banner__chip promo-banner__chip--1 promo-banner__chip--violet">
-                        {% include 'partials/_icon.html.twig' with { icon: 'pin' } %}
-                    </span>
-                    <span class="promo-banner__chip promo-banner__chip--2 promo-banner__chip--coral">
-                        {% include 'partials/_icon.html.twig' with { icon: 'fork' } %}
-                    </span>
-                    <span class="promo-banner__chip promo-banner__chip--3 promo-banner__chip--teal">
-                        {% include 'partials/_icon.html.twig' with { icon: 'spark' } %}
-                    </span>
-                    <span class="promo-banner__chip promo-banner__chip--4 promo-banner__chip--amber">
-                        {% include 'partials/_icon.html.twig' with { icon: 'cup' } %}
-                    </span>
-                    <span class="promo-banner__badge">Von Hand kuratiert</span>
+                <div class="market-hero__tabs" aria-label="Tripora entdecken">
+                    <a href="#staedte" class="market-hero__tab is-active">Städtereisen</a>
+                    <a href="#kategorien" class="market-hero__tab">Food &amp; Cafés</a>
+                    <a href="#so-funktionierts" class="market-hero__tab">Kultur</a>
+                    <a href="#reiseziele" class="market-hero__tab">Locals Favorites</a>
                 </div>
-                <div class="promo-banner__content">
-                    <p class="eyebrow">Unser Ansatz</p>
-                    <h2>Von echten Locals, nicht von Algorithmen</h2>
-                    <p>
-                        Jede Empfehlung auf Tripora wird von Menschen kuratiert, die ihre Stadt wirklich kennen —
-                        keine bezahlten Platzierungen, keine gekauften Bewertungen. Nur ehrliche Tipps für
-                        Sehenswürdigkeiten, Essen und die Orte, die man sonst nur durch Zufall findet.
-                    </p>
-                    <a class="link-arrow" href="#so-funktionierts">Mehr über unseren Ansatz →</a>
+
+                <h1 class="market-hero__title">Finde deinen nächsten Lieblingsort in Deutschland.</h1>
+                <p class="market-hero__subtitle">
+                    Eine search-first Homepage, mit der du in Sekunden die passende Stadt auswählst
+                    und direkt in die nächste Stufe der Tripora-Suche springst.
+                </p>
+
+                <div class="city-search market-search" {{ stimulus_controller('city-search', { cities: cities_data, popular: popular_slugs, limit: 8 }) }}>
+                    <form class="search-bar search-bar--market" action="{{ path('app_search') }}" method="get" role="search" aria-label="Stadt suchen">
+                        <div class="search-bar__slot">
+                            <span class="search-bar__label">Wohin?</span>
+                            <div class="search-bar__field">
+                                <svg class="search-bar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                                    <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                </svg>
+                                <label for="city-input" class="sr-only">Stadt</label>
+                                <input
+                                    type="text"
+                                    id="city-input"
+                                    name="city"
+                                    class="search-bar__input"
+                                    placeholder="Berlin, Hamburg, München ..."
+                                    autocomplete="off"
+                                    required
+                                    role="combobox"
+                                    aria-expanded="false"
+                                    aria-autocomplete="list"
+                                    aria-haspopup="listbox"
+                                    aria-controls="city-listbox"
+                                    data-city-search-target="input"
+                                    data-action="focus->city-search#onFocus input->city-search#onInput keydown->city-search#onKeydown"
+                                >
+                            </div>
+                        </div>
+
+                        <span class="search-bar__divider" aria-hidden="true"></span>
+
+                        <div class="search-bar__slot search-bar__slot--meta" aria-hidden="true">
+                            <span class="search-bar__label">Gerade beliebt</span>
+                            <span class="search-bar__value">
+                                {% for city in popular_cities|slice(0, 3) %}
+                                    {{ city.name }}{% if not loop.last %} · {% endif %}
+                                {% endfor %}
+                            </span>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary search-bar__submit">Suchen</button>
+                    </form>
+                    <div
+                        class="city-search__panel"
+                        id="city-listbox"
+                        role="listbox"
+                        aria-label="Stadtvorschläge"
+                        data-city-search-target="panel"
+                        hidden
+                    ></div>
+                </div>
+
+                <p class="market-hero__microcopy">Kostenlos stöbern · Keine Anmeldung nötig · Kuratiert von echten Locals</p>
+
+                <div class="market-hero__quick-picks">
+                    <span>Direkt starten:</span>
+                    {% for city in popular_cities|slice(0, 5) %}
+                        <a href="{{ path('app_search', { city: city.name }) }}">{{ city.name }}</a>
+                    {% endfor %}
                 </div>
             </div>
+
+            <div class="market-hero__visual" aria-hidden="true">
+                <div class="market-showcase">
+                    <div class="market-showcase__panel">
+                        <div class="market-showcase__header">
+                            <span class="market-showcase__badge">Heute gefragt</span>
+                            <span class="market-showcase__meta">Kuratiert statt zufällig</span>
+                        </div>
+
+                        <div class="market-showcase__scene">
+                            <div class="market-showcase__glow"></div>
+                            <div class="market-showcase__skyline">
+                                {% include 'partials/_skyline.html.twig' with { lights: true } %}
+                            </div>
+                        </div>
+
+                        <div class="market-showcase__cards">
+                            {% for city in popular_cities|slice(0, 3) %}
+                                <div class="market-mini-card market-mini-card--{{ city.accent }}">
+                                    <span class="market-mini-card__title">{{ city.name }}</span>
+                                    <span class="market-mini-card__meta">{{ city.highlightLabel }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="market-floating-card market-floating-card--left">
+                        <span class="market-floating-card__label">Beliebt für</span>
+                        <strong>Wochenendtrips</strong>
+                        <span>Kompakt, visuell, leicht planbar</span>
+                    </div>
+
+                    <div class="market-floating-card market-floating-card--right">
+                        <span class="market-floating-card__label">Suchmuster</span>
+                        <strong>City + Essen + Route</strong>
+                        <span>So starten die meisten Nutzer</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="section section--muted" id="kategorien" {{ stimulus_controller('reveal') }}>
+    <section class="market-strip" aria-label="Tripora in Zahlen">
+        <div class="container market-strip__grid">
+            <div class="market-strip__item">
+                <strong>{{ cities|length }} Städte</strong>
+                <span>sofort durchsuchbar</span>
+            </div>
+            <div class="market-strip__item">
+                <strong>8 Kategorien</strong>
+                <span>pro Stadt gebündelt</span>
+            </div>
+            <div class="market-strip__item">
+                <strong>Locals first</strong>
+                <span>keine gekauften Platzierungen</span>
+            </div>
+            <div class="market-strip__item">
+                <strong>Search first</strong>
+                <span>schneller Einstieg ohne Reibung</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="kategorien" {{ stimulus_controller('reveal') }}>
         <div class="container">
             <div class="section-heading">
-                <p class="eyebrow">Was dich erwartet</p>
-                <h2>Jeder gute Grund, eine Stadt zu lieben — an einem Ort</h2>
+                <p class="eyebrow">Entdecken</p>
+                <h2>Alles, was einen guten Stadttag ausmacht, an einem Ort</h2>
                 <p class="section-heading__lede">
-                    Schluss mit zehn offenen Tabs und veralteten Blogposts. Tripora kuratiert alles, für jede Stadt der Liste.
+                    Die Homepage priorisiert schnelle Suche, visuelle Orientierung und sammelbare Empfehlungen statt langer Marketing-Texte.
                 </p>
             </div>
 
-            <div class="feature-grid">
-                {% set features = [
-                    { icon: 'pin', title: 'Sehenswürdigkeiten', text: 'Landmarken, Aussichtspunkte und Must-Sees — sortiert nach dem, was wirklich überzeugt.' },
-                    { icon: 'fork', title: 'Restaurants', text: 'Von Street Food bis Menü — filterbar nach Küche, Budget und Stadtteil.' },
-                    { icon: 'spark', title: 'Geheimtipps', text: 'Die Orte, die es nie in den Reiseführer schaffen, aber jeder Local kennt.' },
-                    { icon: 'columns', title: 'Museen & Kultur', text: 'Galerien, Museen und Kulturorte — mit genug Kontext, damit sich der Besuch lohnt.' },
-                    { icon: 'route', title: 'Routenplanung', text: 'Fertige Tagespläne, die aus einer Liste von Orten einen echten Ausflug machen.' },
-                    { icon: 'cup', title: 'Cafés', text: 'Die besten Orte zum Runterkommen, Arbeiten oder Leute-Beobachten bei gutem Kaffee.' },
-                    { icon: 'tree', title: 'Parks & Natur', text: 'Grünflächen, Ufer und ruhige Ecken mitten in jeder Stadt.' },
-                    { icon: 'moon', title: 'Nightlife', text: 'Bars, Livemusik und Spots für später — passend zur gewünschten Stimmung.' },
-                ] %}
-
-                {% for feature in features %}
-                    <article class="feature-card" data-reveal-target="item">
-                        <span class="feature-card__icon">
+            <div class="market-feature-grid">
+                {% for feature in discovery_filters %}
+                    <article class="market-feature-card" data-reveal-target="item">
+                        <span class="market-feature-card__icon">
                             {% include 'partials/_icon.html.twig' with { icon: feature.icon } %}
                         </span>
                         <h3>{{ feature.title }}</h3>
@@ -168,41 +181,14 @@
         </div>
     </section>
 
-    <section class="section" id="so-funktionierts" {{ stimulus_controller('reveal') }}>
-        <div class="container">
-            <div class="section-heading">
-                <p class="eyebrow">So funktioniert's</p>
-                <h2>Vom Stadtnamen zum fertigen Tag — in Sekunden</h2>
-            </div>
-
-            <ol class="steps">
-                <li class="step" data-reveal-target="item">
-                    <span class="step__number">01</span>
-                    <h3>Stadt eingeben</h3>
-                    <p>Wähl eine der 20 Städte. Kein Account, kein Aufwand — einfach tippen.</p>
-                </li>
-                <li class="step" data-reveal-target="item">
-                    <span class="step__number">02</span>
-                    <h3>Kuratierte Auswahl erhalten</h3>
-                    <p>Wir zeigen dir die besten Sehenswürdigkeiten, Restaurants, Kultur und Nightlife — sortiert nach Kategorie.</p>
-                </li>
-                <li class="step" data-reveal-target="item">
-                    <span class="step__number">03</span>
-                    <h3>Route zusammenstellen</h3>
-                    <p>Favoriten speichern und Tripora daraus einen machbaren, laufbaren Tagesplan bauen lassen.</p>
-                </li>
-            </ol>
-        </div>
-    </section>
-
     <section class="section" id="staedte" {{ stimulus_controller('reveal')|stimulus_controller('city-carousel') }}>
         <div class="container">
             <div class="section-heading section-heading--split">
                 <div>
-                    <p class="eyebrow">Die 20 Startstädte</p>
-                    <h2>Deutschlands größte Städte, startklar</h2>
+                    <p class="eyebrow">Jetzt beliebt</p>
+                    <h2>Städte, die Nutzer als Erstes öffnen</h2>
                     <p class="section-heading__note">
-                        Bewertungen und Tagesbudgets sind Vorschau-Werte für unser kommendes Empfehlungs-Feature — noch keine echten Nutzerdaten.
+                        Bewertungen und Budgets sind Vorschau-Werte für ein kommendes Feature und noch keine echten Nutzerdaten.
                     </p>
                 </div>
                 <div class="carousel-controls">
@@ -237,7 +223,7 @@
                         </span>
                         <span class="city-card__body">
                             <span class="city-card__name">{{ city.name }}</span>
-                            <span class="city-card__country">{{ city.state }}</span>
+                            <span class="city-card__country">{{ city.state }} · {{ city.populationLabel() }}</span>
                             <span class="city-card__tagline">{{ city.tagline }}</span>
                             <span class="city-card__stats">
                                 <span class="city-card__rating">
@@ -246,7 +232,7 @@
                                 </span>
                                 <span class="city-card__budget">ab {{ city.dailyBudgetFrom }} €/Tag</span>
                             </span>
-                            <span class="city-card__cta">Jetzt entdecken <span aria-hidden="true">→</span></span>
+                            <span class="city-card__cta">Jetzt ansehen <span aria-hidden="true">→</span></span>
                         </span>
                     </a>
                 {% endfor %}
@@ -254,70 +240,100 @@
         </div>
     </section>
 
+    <section class="section section--muted market-collections" {{ stimulus_controller('reveal') }}>
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Inspiration</p>
+                <h2>Collections, die wie auf einer Discovery-Homepage funktionieren</h2>
+                <p class="section-heading__lede">
+                    Große Themenblöcke ersetzen lineares Storytelling und führen Besucher schneller in passende Städte.
+                </p>
+            </div>
+
+            <div class="market-collection-grid">
+                {% for tile in collection_tiles %}
+                    <article class="market-collection market-collection--{{ tile.accent }}" data-reveal-target="item">
+                        <span class="market-collection__eyebrow">{{ tile.eyebrow }}</span>
+                        <h3>{{ tile.title }}</h3>
+                        <p>{{ tile.text }}</p>
+                        <a href="#reiseziele" class="market-collection__link">Sammlung öffnen</a>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="so-funktionierts" {{ stimulus_controller('reveal') }}>
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">So funktioniert's</p>
+                <h2>Vom ersten Suchbegriff bis zum fertigen Tag</h2>
+            </div>
+
+            <ol class="steps">
+                <li class="step" data-reveal-target="item">
+                    <span class="step__number">01</span>
+                    <h3>Stadt suchen</h3>
+                    <p>Die Homepage beginnt mit einer kompakten Suche statt mit einem langen Intro. Nutzer kommen sofort ins Produkt.</p>
+                </li>
+                <li class="step" data-reveal-target="item">
+                    <span class="step__number">02</span>
+                    <h3>Empfehlungen filtern</h3>
+                    <p>Sehenswürdigkeiten, Essen, Kultur, Parks und Nightlife sind direkt in klaren Collections und Kategorien erreichbar.</p>
+                </li>
+                <li class="step" data-reveal-target="item">
+                    <span class="step__number">03</span>
+                    <h3>Route zusammenstellen</h3>
+                    <p>Besucher springen von der Entdeckung in die Detailansicht und bauen daraus ohne Reibung ihren Tag oder Wochenendtrip.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
     <section class="section section--muted" id="reiseziele" {{ stimulus_controller('reveal') }}>
         <div class="container">
             <div class="section-heading">
-                <p class="eyebrow">Reiseziele</p>
-                <h2>Alle 20 Städte im Überblick</h2>
-                <p class="section-heading__lede">Jede Stadt kommt mit denselben 8 Kategorien — von Sehenswürdigkeiten bis Nightlife.</p>
+                <p class="eyebrow">Alle Reiseziele</p>
+                <h2>Die gesamte Deutschland-Auswahl im Überblick</h2>
+                <p class="section-heading__lede">Ideal für Nutzer, die lieber stöbern als direkt zu suchen.</p>
             </div>
 
             <div class="destination-grid">
                 {% for city in cities %}
                     <a href="{{ path('app_search', { city: city.name }) }}" class="destination-tile" data-reveal-target="item">
                         <span class="destination-tile__name">{{ city.name }}</span>
-                        <span class="destination-tile__meta">{{ city.state }} · 8 Kategorien</span>
+                        <span class="destination-tile__meta">{{ city.state }} · {{ city.populationLabel() }}</span>
                     </a>
                 {% endfor %}
             </div>
         </div>
     </section>
 
-    <section class="section quote-section" {{ stimulus_controller('reveal') }}>
-        <div class="container quote-section__inner" data-reveal-target="item">
-            <svg class="quote-mark" width="40" height="32" viewBox="0 0 40 32" fill="currentColor" aria-hidden="true">
-                <path d="M0 20.8C0 9.3 8 1.7 18.7 0l2 5.6C13.9 7.6 9.9 12 9.6 17.3c1-.5 2.1-.7 3.4-.7 5 0 8.7 3.6 8.7 8.7S17.4 34 12.3 34C5.3 34 0 28.6 0 20.8Zm20.6 0C20.6 9.3 28.6 1.7 39.3 0l2 5.6c-6.8 2-10.8 6.4-11.1 11.7 1-.5 2.1-.7 3.4-.7 5 0 8.7 3.6 8.7 8.7S37.4 34 32.3 34c-7 0-12.3-5.4-12.3-13.2Z" transform="translate(0 -2)"/>
-            </svg>
-            <p class="quote-section__text">
-                „Ich hab eine Stadt eingegeben und hatte einen kompletten Tag geplant — Sehenswürdigkeit,
-                Mittagsspot, ein Park zum Durchatmen und eine Bar für später. Hat sich angefühlt, als hätte
-                ich eine ortskundige Freundin, die schon alles rausgesucht hat.“
-            </p>
-            <div class="quote-section__author">
-                <span class="avatar" aria-hidden="true">MK</span>
-                <div>
-                    <strong>Mira K.</strong>
-                    <span>War mit Tripora in 6 Städten unterwegs</span>
+    <section class="section market-quote" {{ stimulus_controller('reveal') }}>
+        <div class="container market-quote__grid">
+            <div class="quote-section__inner" data-reveal-target="item">
+                <svg class="quote-mark" width="40" height="32" viewBox="0 0 40 32" fill="currentColor" aria-hidden="true">
+                    <path d="M0 20.8C0 9.3 8 1.7 18.7 0l2 5.6C13.9 7.6 9.9 12 9.6 17.3c1-.5 2.1-.7 3.4-.7 5 0 8.7 3.6 8.7 8.7S17.4 34 12.3 34C5.3 34 0 28.6 0 20.8Zm20.6 0C20.6 9.3 28.6 1.7 39.3 0l2 5.6c-6.8 2-10.8 6.4-11.1 11.7 1-.5 2.1-.7 3.4-.7 5 0 8.7 3.6 8.7 8.7S37.4 34 32.3 34c-7 0-12.3-5.4-12.3-13.2Z" transform="translate(0 -2)"/>
+                </svg>
+                <p class="quote-section__text">
+                    „Ich wollte nicht dutzende Seiten vergleichen. Eine Stadt eingeben, kuratierte Orte sehen und daraus direkt einen Plan bauen
+                    fühlt sich einfach wesentlich leichter an.“
+                </p>
+                <div class="quote-section__author">
+                    <span class="avatar" aria-hidden="true">MK</span>
+                    <div>
+                        <strong>Mira K.</strong>
+                        <span>Plant ihre Wochenendtrips inzwischen komplett mit Tripora</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="section onboarding-strip">
-        <div class="container onboarding-strip__grid">
-            <div class="onboarding-strip__item">
-                <span class="onboarding-strip__icon" aria-hidden="true">🗺️</span>
-                <h3>Deutschlandweit unterwegs</h3>
-                <p>Sehenswürdigkeiten, Restaurants und Geheimtipps für die 20 größten Städte Deutschlands — mehr kommt laufend dazu.</p>
+            <div class="market-cta-card" data-reveal-target="item">
+                <p class="eyebrow">Bereit zum Suchen?</p>
+                <h2>Öffne eine Stadt und geh direkt in die Empfehlungen.</h2>
+                <p>Die Homepage führt jetzt viel schneller vom ersten Eindruck zur eigentlichen Produktnutzung.</p>
+                <a href="#suche" class="btn btn--primary">Stadt auswählen</a>
             </div>
-            <div class="onboarding-strip__item">
-                <span class="onboarding-strip__icon" aria-hidden="true">⚡</span>
-                <h3>In Sekunden zur Route</h3>
-                <p>Stadt eingeben, Kategorien durchstöbern, Favoriten merken — fertig ist der Plan für deinen Tag.</p>
-            </div>
-            <div class="onboarding-strip__item">
-                <span class="onboarding-strip__icon" aria-hidden="true">🕒</span>
-                <h3>Immer aktuell gehalten</h3>
-                <p>Unsere Empfehlungen werden laufend von echten Locals überprüft und ergänzt.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-banner">
-        <div class="container cta-banner__inner">
-            <h2>Stadt wählen. Wir übernehmen den Rest.</h2>
-            <p>Kostenlos zum Entdecken — kein Account nötig, um loszulegen.</p>
-            <a href="#suche" class="btn btn--light">Jetzt Stadt entdecken</a>
         </div>
     </section>
 
