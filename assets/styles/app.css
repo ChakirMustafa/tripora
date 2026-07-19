@@ -1219,13 +1219,14 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing:
     height: 48px;
     padding: 0;
     border-radius: 50%;
-    background: var(--color-primary);
-    color: #fff;
+    background: #fff;
+    border: 1.5px solid #E3E5E8;
+    color: var(--color-text);
     box-shadow: none;
 }
-.explore-searchbar__submit:hover { background: var(--color-primary-dark); }
+.explore-searchbar__submit:hover { background: var(--color-surface-muted); }
 .explore-searchbar__submit svg { width: 16px; height: 16px; }
-.explore-searchbar__submit-label { display: none; }
+.explore-searchbar__submit-label { display: none; font-weight: 600; }
 
 @media (min-width: 700px) {
     .explore-searchbar__pill .search-bar__slot--meta { display: flex; }
@@ -1250,13 +1251,18 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing:
     }
     .explore-searchbar__submit {
         width: calc(100% - 8px);
+        height: 44px;
+        border-radius: 999px;
         margin-top: 4px;
+        gap: 8px;
     }
+    .explore-searchbar__submit-label { display: inline; }
 }
 
 .page-home .city-search__panel {
     top: calc(100% + 14px);
     border-radius: 24px;
+    z-index: 60;
 }
 
 /* ---------- Explore homepage: category bar ---------- */
