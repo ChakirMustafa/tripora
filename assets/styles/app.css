@@ -1,7 +1,7 @@
 /* ==========================================================================
-   Tripora — Homepage design system
+   homely — Homepage design system
    Premium, minimal, responsive. Visual structure inspired by Musement,
-   adapted to Tripora's own concept, color identity and content.
+   adapted to homely's own concept, color identity and content.
    ========================================================================== */
 
 :root {
@@ -214,11 +214,11 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing:
 .site-header__zone--nav { grid-column: 2; display: flex; justify-content: center; min-width: 0; }
 .site-header__zone--actions { grid-column: 3; }
 
-.brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: 1.125rem; transition: opacity 0.15s var(--ease); }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.375rem; transition: opacity 0.15s var(--ease); }
 .brand:hover { opacity: 0.82; }
 .brand__mark { display: inline-flex; color: var(--color-primary); transition: transform 0.3s var(--ease); }
 .brand:hover .brand__mark { transform: rotate(8deg) scale(1.08); }
-.brand__name { letter-spacing: -0.01em; }
+.brand__name { letter-spacing: -0.01em; color: #FF385C; }
 .brand__divider { width: 1px; height: 16px; background: var(--color-border); margin: 0 1px; }
 .brand__locale {
     display: none;

@@ -133,7 +133,7 @@ export default class extends Controller {
         return `
             <p class="city-search__heading">Keine Treffer für „${escapeHtml(query)}“</p>
             <p class="city-search__empty">
-                Tripora startet mit den 24 größten Städten Deutschlands — wähl eine davon, weitere folgen bald.
+                homely startet mit den 24 größten Städten Deutschlands — wähl eine davon, weitere folgen bald.
             </p>
         `;
     }
