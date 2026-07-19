@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\City;
 
 /**
- * In-memory catalog of the 20 largest German cities by population.
+ * In-memory catalog of the 24 largest German cities by population.
  *
  * This is the seed for Tripora's Germany-first launch. Once city
  * coverage grows beyond a hand-curated list, this should be replaced
@@ -124,6 +124,10 @@ final class GermanCityCatalog
             ['Bielefeld', 'bielefeld', 'Nordrhein-Westfalen', 334_000, 'Ostwestfalen mit Überraschung', 'rose', 'spark', 'Geheimtipps', 4.4, 47, 18],
             ['Bonn', 'bonn', 'Nordrhein-Westfalen', 331_000, 'Beethovens Geburtsstadt am Rhein', 'violet', 'columns', 'Museen & Kultur', 4.7, 84, 24],
             ['Münster', 'muenster', 'Nordrhein-Westfalen', 318_000, 'Fahrradstadt mit Altstadt-Charme', 'teal', 'cup', 'Cafés', 4.8, 96, 21],
+            ['Mönchengladbach', 'moenchengladbach', 'Nordrhein-Westfalen', 261_000, 'Park- und Gartenstadt am Niederrhein', 'coral', 'tree', 'Parks & Natur', 4.4, 41, 19],
+            ['Gelsenkirchen', 'gelsenkirchen', 'Nordrhein-Westfalen', 260_000, 'Fußball, Zechen und Ruhrpott-Flair', 'amber', 'moon', 'Nightlife', 4.3, 38, 18],
+            ['Aachen', 'aachen', 'Nordrhein-Westfalen', 249_000, 'Kaiserstadt mit Dom und Grenzcharme', 'violet', 'columns', 'Museen & Kultur', 4.7, 112, 25],
+            ['Braunschweig', 'braunschweig', 'Niedersachsen', 248_000, 'Löwenstadt zwischen Fachwerk und Forschung', 'teal', 'pin', 'Sehenswürdigkeiten', 4.5, 67, 22],
         ];
     }
 }

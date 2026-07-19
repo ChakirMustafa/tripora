@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 /**
  * Handles the "Stadt entdecken" search entry point from the homepage.
  *
- * Tripora is launching with a curated set of the 20 largest German
+ * Tripora is launching with a curated set of the 24 largest German
  * cities. The full search & discovery experience (attractions,
  * restaurants, itineraries, etc.) is planned for a follow-up
  * iteration — for now, a match against the whitelist leads to a
@@ -42,7 +42,7 @@ final class SearchController extends AbstractController
 
         if (null === $city) {
             $this->addFlash('notice', sprintf(
-                '„%s“ ist noch nicht dabei — wir starten mit den 20 größten Städten Deutschlands. Wähl eine davon aus der Liste.',
+                '„%s“ ist noch nicht dabei — wir starten mit den 24 größten Städten Deutschlands. Wähl eine davon aus der Liste.',
                 $query,
             ));
 

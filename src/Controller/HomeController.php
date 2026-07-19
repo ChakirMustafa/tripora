@@ -23,7 +23,7 @@ final class HomeController extends AbstractController
     public function index(): Response
     {
         $allCities = $this->cityCatalog->all();
-        $popularCities = $this->cityCatalog->popular(8);
+        $popularCities = $this->cityCatalog->popular(12);
 
         return $this->render('home/index.html.twig', [
             'cities' => $allCities,

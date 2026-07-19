@@ -2,8 +2,9 @@
     Airbnb-style listing card, repurposed for a German city instead of
     a rentable home: a square "photo" (skyline art standing in for
     real photography, matching partials/_skyline.html.twig elsewhere),
-    a save/heart icon, a "Beliebt" badge for top-rated cities, and a
-    name/rating/meta/price block underneath.
+    a save/heart icon, a "Gästefavorit" badge for top-rated cities, and
+    a title/meta/price+rating block underneath — mirroring Airbnb's own
+    card layout (title line, muted subtitle line, price + rating line).
 
     Expects a single `city` variable (App\City\GermanCity).
 #}
@@ -18,8 +19,8 @@
         <span class="listing-card__skyline">
             {% include 'partials/_skyline.html.twig' with { lights: true } %}
         </span>
-        {% if city.rating >= 4.8 %}
-            <span class="listing-card__badge">Beliebt</span>
+        {% if city.rating >= 4.7 %}
+            <span class="listing-card__badge">Gästefavorit</span>
         {% endif %}
         <span class="listing-card__heart" aria-hidden="true">
             <svg viewBox="0 0 24 24">
@@ -28,14 +29,13 @@
         </span>
     </span>
 
-    <span class="listing-card__row">
-        <span class="listing-card__name">{{ city.name }}</span>
-        <span class="listing-card__rating">
+    <span class="listing-card__title">{{ city.name }}</span>
+    <span class="listing-card__meta">{{ city.state }}</span>
+    <span class="listing-card__price">
+        <strong>ab {{ city.dailyBudgetFrom }} €</strong> / Tag
+        <span class="listing-card__stars">
             <svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.6L18.3 22 12 18l-6.3 4 1.6-7.8L2 9.6 9 9z"/></svg>
             {{ city.ratingLabel() }}
         </span>
     </span>
-    <span class="listing-card__meta">{{ city.state }}</span>
-    <span class="listing-card__tagline">{{ city.tagline }}</span>
-    <span class="listing-card__price"><strong>ab {{ city.dailyBudgetFrom }} €</strong> / Tag</span>
 </a>

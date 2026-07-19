@@ -17,9 +17,9 @@ export default class extends Controller {
     }
 
     scrollByCard(direction) {
-        const card = this.trackTarget.querySelector('.city-card');
-        const gap = 18;
-        const distance = card ? card.offsetWidth + gap : 280;
+        const card = this.trackTarget.querySelector('.listing-card');
+        const gap = 16;
+        const distance = card ? card.offsetWidth + gap : 216;
 
         this.trackTarget.scrollBy({ left: distance * direction, behavior: 'smooth' });
     }

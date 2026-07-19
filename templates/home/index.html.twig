@@ -94,10 +94,12 @@
             <div class="container">
                 <section class="explore-section" id="staedte" data-category-filter-target="section" {{ stimulus_controller('reveal') }}>
                     <div class="section-heading section-heading--tight">
-                        <h2>Beliebte Städte</h2>
-                        <p class="section-heading__note">
-                            Bewertungen und Budgets sind Vorschau-Werte für ein kommendes Feature und noch keine echten Nutzerdaten.
-                        </p>
+                        <div>
+                            <h2>Beliebte Städte</h2>
+                            <p class="section-heading__note">
+                                Bewertungen und Budgets sind Vorschau-Werte für ein kommendes Feature und noch keine echten Nutzerdaten.
+                            </p>
+                        </div>
                     </div>
                     <div class="listing-grid">
                         {% for city in popular_cities %}
@@ -108,7 +110,9 @@
 
                 <section class="explore-section" id="reiseziele" data-category-filter-target="section" {{ stimulus_controller('reveal') }}>
                     <div class="section-heading section-heading--tight">
-                        <h2>Alle Reiseziele in Deutschland</h2>
+                        <div>
+                            <h2>Alle Reiseziele in Deutschland</h2>
+                        </div>
                     </div>
                     <div class="listing-grid">
                         {% for city in cities %}
