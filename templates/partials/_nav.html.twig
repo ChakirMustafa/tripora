@@ -23,10 +23,9 @@
 
         <div class="site-header__zone--nav">
             <nav class="primary-nav" aria-label="Haupt­navigation">
-                <a href="#staedte">Städte entdecken</a>
+                <a href="#suche">Suchen</a>
+                <a href="#staedte">Beliebte Städte</a>
                 <a href="#reiseziele">Alle Reiseziele</a>
-                <a href="#so-funktionierts">So funktioniert's</a>
-                <a href="#kategorien">Was dich erwartet</a>
             </nav>
         </div>
 
@@ -55,10 +54,9 @@
 
     <div id="mobile-menu" class="mobile-menu" {{ stimulus_target('nav', 'menu') }} hidden>
         <nav aria-label="Mobile Navigation">
-            <a href="#staedte" {{ stimulus_action('nav', 'close') }}>Städte entdecken</a>
+            <a href="#suche" {{ stimulus_action('nav', 'close') }}>Suchen</a>
+            <a href="#staedte" {{ stimulus_action('nav', 'close') }}>Beliebte Städte</a>
             <a href="#reiseziele" {{ stimulus_action('nav', 'close') }}>Alle Reiseziele</a>
-            <a href="#so-funktionierts" {{ stimulus_action('nav', 'close') }}>So funktioniert's</a>
-            <a href="#kategorien" {{ stimulus_action('nav', 'close') }}>Was dich erwartet</a>
             <a class="btn btn--primary site-header__cta btn--block" href="#suche" {{ stimulus_action('nav', 'close') }}>Jetzt entdecken</a>
         </nav>
     </div>
