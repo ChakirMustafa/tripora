@@ -1181,7 +1181,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing:
 
 .explore-searchbar__pill {
     gap: 0;
-    padding: 10px;
+    padding: 6px;
     border: 1px solid var(--color-border);
     border-radius: 999px;
     box-shadow: 0 20px 40px -28px rgba(34, 34, 34, 0.4);
@@ -1196,8 +1196,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing:
     min-width: 0;
     flex-direction: column;
     justify-content: center;
-    gap: 4px;
-    padding: 8px 18px;
+    gap: 2px;
+    padding: 6px 18px;
 }
 .explore-searchbar__pill .search-bar__slot--meta { flex: 0.9; display: none; }
 .explore-searchbar__pill .search-bar__label { font-size: 0.75rem; font-weight: 700; color: var(--color-text); }
@@ -1210,13 +1210,12 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing:
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.explore-searchbar__pill .search-bar__icon { color: var(--color-text-faint); }
 .explore-searchbar__pill .search-bar__input { padding: 0; font-size: 0.96875rem; }
 
 .explore-searchbar__submit {
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     padding: 0;
     border-radius: 50%;
     background: #fff;
