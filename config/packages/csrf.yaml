@@ -1,0 +1,8 @@
+# CSRF protection for forms and logins/logouts.
+#
+# The default session-backed token manager is used (no "stateless_token_ids"),
+# so tokens are validated server-side without relying on client-side JavaScript.
+framework:
+    form:
+        csrf_protection:
+            token_id: submit
