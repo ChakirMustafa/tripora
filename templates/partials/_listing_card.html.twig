@@ -1,10 +1,12 @@
 {#
-    Airbnb-style listing card, repurposed for a German city instead of
-    a rentable home: a square "photo" (skyline art standing in for
-    real photography, matching partials/_skyline.html.twig elsewhere),
-    a save/heart icon, a "Gästefavorit" badge for top-rated cities, and
-    a title/meta/price+rating block underneath — mirroring Airbnb's own
-    card layout (title line, muted subtitle line, price + rating line).
+    City card: a square photo of the city's iconic landmark, a
+    save/heart icon, a "Gästefavorit" badge for top-rated cities, and a
+    title/meta/price+rating block underneath — mirroring a
+    marketplace-card layout (title line, muted subtitle line, price +
+    rating line).
+
+    The photo comes from App\City\GermanCity::imagePath() and falls back
+    to the card's accent gradient while it loads.
 
     Expects a single `city` variable (App\City\GermanCity).
 #}
@@ -16,9 +18,13 @@
     data-reveal-target="item"
 >
     <span class="listing-card__photo">
-        <span class="listing-card__skyline">
-            {% include 'partials/_skyline.html.twig' with { lights: true } %}
-        </span>
+        <img
+            class="listing-card__img"
+            src="{{ asset(city.imagePath) }}"
+            alt="{{ city.name }} – {{ city.landmark }}"
+            loading="lazy"
+            decoding="async"
+        >
         {% if city.rating >= 4.7 %}
             <span class="listing-card__badge">Gästefavorit</span>
         {% endif %}

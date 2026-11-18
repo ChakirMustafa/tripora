@@ -30,6 +30,7 @@ final readonly class GermanCity
         public float $rating,
         public int $recommendations,
         public int $dailyBudgetFrom,
+        public string $landmark,
     ) {
     }
 
@@ -41,6 +42,15 @@ final readonly class GermanCity
     public function ratingLabel(): string
     {
         return number_format($this->rating, 1, ',', '.');
+    }
+
+    /**
+     * Path (relative to the assets root) of the photo representing this
+     * city — its landmark. Used as the card thumbnail.
+     */
+    public function imagePath(): string
+    {
+        return 'images/cities/'.$this->slug.'.jpg';
     }
 
     /**
