@@ -7,7 +7,7 @@ namespace App\City;
 /**
  * In-memory catalog of the 24 largest German cities by population.
  *
- * This is the seed for homely's Germany-first launch. Once city
+ * This is the seed for Tripora's Germany-first launch. Once city
  * coverage grows beyond a hand-curated list, this should be replaced
  * by a database-backed repository behind the same two lookup methods.
  */
