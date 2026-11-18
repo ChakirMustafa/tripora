@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ city.name }} entdecken — Tripora{% endblock %}
+{% block meta_description %}Sehenswürdigkeiten, Restaurants, Cafés und Geheimtipps in {{ city.name }}: {{ city.tagline }}{% endblock %}
+{% block body_class %}page-city{% endblock %}
+
+{% block body %}
+    <section class="city-hero city-hero--{{ city.accent }}">
+        <div class="container city-hero__inner">
+            <nav class="breadcrumb" aria-label="Brotkrumen">
+                <a href="{{ path('app_home') }}">Startseite</a>
+                <span aria-hidden="true">/</span>
+                <a href="{{ path('app_home') }}#reiseziele">Reiseziele</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">{{ city.name }}</span>
+            </nav>
+
+            <p class="eyebrow">{{ city.state }}</p>
+            <h1>{{ city.name }}</h1>
+            <p class="city-hero__tagline">{{ city.tagline }}</p>
+
+            <dl class="city-hero__stats">
+                <div>
+                    <dt>Einwohner</dt>
+                    <dd>{{ city.populationLabel() }}</dd>
+                </div>
+                <div>
+                    <dt>Bewertung</dt>
+                    <dd>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 7 7 .6-5.3 4.6L18.3 22 12 18l-6.3 4 1.6-7.8L2 9.6 9 9z"/></svg>
+                        {{ city.ratingLabel() }}
+                    </dd>
+                </div>
+                <div>
+                    <dt>Budget ab</dt>
+                    <dd>{{ city.dailyBudgetFrom }} € / Tag</dd>
+                </div>
+            </dl>
+
+            <p class="city-hero__note">Bewertungen und Budgets sind Vorschau-Werte für ein kommendes Feature und noch keine echten Nutzerdaten.</p>
+        </div>
+    </section>
+
+    {% if categories is not empty %}
+        <nav class="city-chips" aria-label="Kategorien in {{ city.name }}">
+            <div class="container city-chips__inner">
+                {% for category in categories %}
+                    <span class="city-chip">
+                        <span class="city-chip__icon">{% include 'partials/_icon.html.twig' with { icon: category.icon } %}</span>
+                        {{ category.label }}
+                    </span>
+                {% endfor %}
+            </div>
+        </nav>
+    {% endif %}
+
+    <section class="section">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Highlights</p>
+                <h2>Was {{ city.name }} besonders macht</h2>
+                <p class="section-heading__lede">
+                    Eine erste Auswahl bekannter Orte und Viertel — als Ausgangspunkt für deine Erkundung.
+                </p>
+            </div>
+
+            {% if highlights is not empty %}
+                <div class="city-highlights">
+                    {% for highlight in highlights %}
+                        <article class="city-highlight">
+                            <span class="city-highlight__icon">{% include 'partials/_icon.html.twig' with { icon: highlight.icon } %}</span>
+                            <h3>{{ highlight.title }}</h3>
+                            <p>{{ highlight.blurb }}</p>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="city-empty">
+                    Wir stellen gerade Empfehlungen für {{ city.name }} zusammen. Schau bald wieder vorbei.
+                </p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="section section--muted">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Weiter entdecken</p>
+                <h2>Andere Reiseziele</h2>
+            </div>
+            <div class="listing-grid">
+                {% for other in other_cities %}
+                    {% include 'partials/_listing_card.html.twig' with { city: other } %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

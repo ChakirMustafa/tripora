@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mein Konto — Tripora{% endblock %}
+{% block meta_description %}Dein Tripora-Konto.{% endblock %}
+{% block body_class %}page-account{% endblock %}
+
+{% block body %}
+    <section class="account">
+        <div class="container">
+            <header class="account__head">
+                <p class="eyebrow">Mein Konto</p>
+                <h1>Hallo {{ app.user.displayName }}</h1>
+                <p class="account__lede">Schön, dass du da bist. Hier findest du deine Kontodaten.</p>
+            </header>
+
+            <div class="account__card">
+                <dl class="account__facts">
+                    <div>
+                        <dt>Name</dt>
+                        <dd>{{ app.user.displayName }}</dd>
+                    </div>
+                    <div>
+                        <dt>E-Mail</dt>
+                        <dd>{{ app.user.email }}</dd>
+                    </div>
+                    <div>
+                        <dt>Mitglied seit</dt>
+                        <dd>{{ app.user.createdAt|date('d.m.Y') }}</dd>
+                    </div>
+                </dl>
+                <a class="btn btn--ghost" href="{{ path('app_logout') }}">Abmelden</a>
+            </div>
+
+            <section class="account__section">
+                <h2>Beliebte Städte für dich</h2>
+                <div class="listing-grid">
+                    {% for city in popular_cities %}
+                        {% include 'partials/_listing_card.html.twig' with { city: city } %}
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </section>
+{% endblock %}

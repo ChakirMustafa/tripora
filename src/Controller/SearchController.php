@@ -13,12 +13,9 @@ use Symfony\Component\Routing\Attribute\Route;
 /**
  * Handles the "Stadt entdecken" search entry point from the homepage.
  *
- * homely is launching with a curated set of the 24 largest German
- * cities. The full search & discovery experience (attractions,
- * restaurants, itineraries, etc.) is planned for a follow-up
- * iteration — for now, a match against the whitelist leads to a
- * friendly holding page, and anything else guides the visitor back
- * to a supported city.
+ * Tripora launches with a curated set of the 24 largest German cities.
+ * A match against that list opens the full destination page; anything
+ * else guides the visitor back to a supported city.
  */
 final class SearchController extends AbstractController
 {
@@ -49,8 +46,6 @@ final class SearchController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('search/results.html.twig', [
-            'city' => $city,
-        ]);
+        return $this->redirectToRoute('app_city', ['slug' => $city->slug]);
     }
 }

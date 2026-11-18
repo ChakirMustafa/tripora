@@ -9,7 +9,7 @@
     Expects a single `city` variable (App\City\GermanCity).
 #}
 <a
-    href="{{ path('app_search', { city: city.name }) }}"
+    href="{{ path('app_city', { slug: city.slug }) }}"
     class="listing-card listing-card--{{ city.accent }}"
     data-category="{{ city.highlightIcon }}"
     data-category-filter-target="card"

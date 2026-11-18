@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Anmelden — Tripora{% endblock %}
+{% block meta_description %}Melde dich bei Tripora an, um Städte zu speichern und Empfehlungen zu verwalten.{% endblock %}
+{% block body_class %}page-auth{% endblock %}
+
+{% block body %}
+    <section class="auth">
+        <div class="container auth__inner">
+            <div class="auth__card">
+                <p class="eyebrow">Willkommen zurück</p>
+                <h1>Anmelden</h1>
+                <p class="auth__lede">Melde dich an, um deine gemerkten Städte und Routen zu verwalten.</p>
+
+                {% if error %}
+                    <div class="auth__error" role="alert">E-Mail-Adresse oder Passwort ist nicht korrekt.</div>
+                {% endif %}
+
+                <form method="post" class="auth-form" novalidate>
+                    <div class="auth-form__field">
+                        <label for="username" class="auth-form__label">E-Mail</label>
+                        <input type="email" value="{{ last_username }}" name="_username" id="username" class="auth-form__input" autocomplete="email" placeholder="du@beispiel.de" required autofocus>
+                    </div>
+
+                    <div class="auth-form__field">
+                        <label for="password" class="auth-form__label">Passwort</label>
+                        <input type="password" name="_password" id="password" class="auth-form__input" autocomplete="current-password" placeholder="••••••••" required>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <button class="btn btn--primary btn--block" type="submit">Anmelden</button>
+                </form>
+
+                <p class="auth__alt">Noch kein Konto? <a href="{{ path('app_register') }}">Jetzt registrieren</a></p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

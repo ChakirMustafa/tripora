@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registrieren — Tripora{% endblock %}
+{% block meta_description %}Erstelle dein kostenloses Tripora-Konto und entdecke deutsche Städte.{% endblock %}
+{% block body_class %}page-auth{% endblock %}
+
+{% block body %}
+    <section class="auth">
+        <div class="container auth__inner">
+            <div class="auth__card">
+                <p class="eyebrow">Kostenlos starten</p>
+                <h1>Konto erstellen</h1>
+                <p class="auth__lede">Speichere Städte, plane Routen und erhalte persönliche Empfehlungen.</p>
+
+                {{ form_start(registrationForm, { attr: { class: 'auth-form', novalidate: 'novalidate' } }) }}
+                    <div class="auth-form__field">
+                        {{ form_label(registrationForm.displayName, null, { label_attr: { class: 'auth-form__label' } }) }}
+                        {{ form_widget(registrationForm.displayName, { attr: { class: 'auth-form__input' } }) }}
+                        {{ form_errors(registrationForm.displayName) }}
+                    </div>
+
+                    <div class="auth-form__field">
+                        {{ form_label(registrationForm.email, null, { label_attr: { class: 'auth-form__label' } }) }}
+                        {{ form_widget(registrationForm.email, { attr: { class: 'auth-form__input' } }) }}
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+
+                    <div class="auth-form__field">
+                        {{ form_label(registrationForm.plainPassword.first, null, { label_attr: { class: 'auth-form__label' } }) }}
+                        {{ form_widget(registrationForm.plainPassword.first, { attr: { class: 'auth-form__input' } }) }}
+                    </div>
+
+                    <div class="auth-form__field">
+                        {{ form_label(registrationForm.plainPassword.second, null, { label_attr: { class: 'auth-form__label' } }) }}
+                        {{ form_widget(registrationForm.plainPassword.second, { attr: { class: 'auth-form__input' } }) }}
+                    </div>
+
+                    {{ form_errors(registrationForm.plainPassword) }}
+                    {{ form_errors(registrationForm.plainPassword.first) }}
+
+                    <button class="btn btn--primary btn--block" type="submit">Registrieren</button>
+                {{ form_end(registrationForm) }}
+
+                <p class="auth__alt">Du hast schon ein Konto? <a href="{{ path('app_login') }}">Anmelden</a></p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
